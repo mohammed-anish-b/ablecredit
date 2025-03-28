@@ -1,12 +1,26 @@
-import 'dart:math';
-
 import 'package:ablecredit/models/car.dart';
 import 'package:ablecredit/services/database_service.dart';
+import 'package:ablecredit/services/workmanager_service.dart';
+import 'package:ablecredit/utils/utils.dart';
 import 'package:flutter/material.dart';
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  const Home({super.key});
+
+  @override
+  State<Home> createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> {
   final DatabaseService dbService = DatabaseService();
-  Home({super.key});
+
+  final WorkManagerService workManagerService = WorkManagerService();
+
+  @override
+  void initState() {
+    workManagerService.initializeWorkManager();
+    super.initState();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -38,30 +52,21 @@ class Home extends StatelessWidget {
           ),
           ElevatedButton(
             onPressed: () {
-              Car newCar = generateRandomCar();
+              Car newCar = Utils.generateRandomCar();
               dbService.addCar(newCar);
             },
             child: const Text("Add Car"),
           ),
+          ElevatedButton(
+            onPressed: workManagerService.startWorkManager,
+            child: const Text("Start WorkManager"),
+          ),
+          ElevatedButton(
+            onPressed: workManagerService.stopWorkManager,
+            child: const Text("Stop WorkManager"),
+          ),
         ],
       ),
-    );
-  }
-
-  Car generateRandomCar() {
-    final List<String> models = [
-      "Toyota Corolla",
-      "Honda Civic",
-      "Ford Mustang",
-      "BMW X5",
-      "Audi A4"
-    ];
-    final Random random = Random();
-    return Car(
-      model: models[random.nextInt(models.length)],
-      year: 2000 + random.nextInt(25),
-      vehicleTag:
-          "KL${random.nextInt(100).toString().padLeft(2, '0')}XYZ${random.nextInt(9999).toString().padLeft(4, '0')}",
     );
   }
 }
