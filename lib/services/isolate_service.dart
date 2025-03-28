@@ -14,6 +14,7 @@ class IsolateService {
     return receivePort.first.toString();
   }
 
+  @pragma('vm:entry-point')
   static void _backgroundTask(SendPort sendPort) async {
     await Firebase.initializeApp(
       options: DefaultFirebaseOptions.currentPlatform,
