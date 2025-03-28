@@ -1,5 +1,33 @@
 {
-  "database": {
-    "rules": "database.rules.json"
-  }
+    "database": {
+        "rules": "database.rules.json"
+    },
+    "flutter": {
+        "platforms": {
+            "android": {
+                "default": {
+                    "projectId": "ablecredit-anish",
+                    "appId": "1:851284711758:android:00b83ba61b45cdf80b261f",
+                    "fileOutput": "android/app/google-services.json"
+                }
+            },
+            "ios": {
+                "default": {
+                    "projectId": "ablecredit-anish",
+                    "appId": "1:851284711758:ios:c69eab495ec71f5f0b261f",
+                    "uploadDebugSymbols": false,
+                    "fileOutput": "ios/Runner/GoogleService-Info.plist"
+                }
+            },
+            "dart": {
+                "lib/firebase_options.dart": {
+                    "projectId": "ablecredit-anish",
+                    "configurations": {
+                        "android": "1:851284711758:android:00b83ba61b45cdf80b261f",
+                        "ios": "1:851284711758:ios:c69eab495ec71f5f0b261f"
+                    }
+                }
+            }
+        }
+    }
 }
