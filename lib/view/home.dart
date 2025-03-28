@@ -1,8 +1,8 @@
 import 'package:ablecredit/models/car.dart';
 import 'package:ablecredit/services/database_service.dart';
+import 'package:ablecredit/services/isolate_service.dart';
 import 'package:ablecredit/services/platform_channel_service.dart';
 import 'package:ablecredit/services/workmanager_service.dart';
-import 'package:ablecredit/utils/utils.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -51,12 +51,9 @@ class _HomeState extends State<Home> {
               },
             ),
           ),
-          ElevatedButton(
-            onPressed: () {
-              Car newCar = Utils.generateRandomCar();
-              dbService.addCar(newCar);
-            },
-            child: const Text("Add Car"),
+          const ElevatedButton(
+            onPressed: IsolateService.executeBackgroundTask,
+            child: Text("Add Car using Isolate"),
           ),
           ElevatedButton(
             onPressed: workManagerService.startWorkManager,
