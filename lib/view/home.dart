@@ -1,5 +1,6 @@
 import 'package:ablecredit/models/car.dart';
 import 'package:ablecredit/services/database_service.dart';
+import 'package:ablecredit/services/platform_channel_service.dart';
 import 'package:ablecredit/services/workmanager_service.dart';
 import 'package:ablecredit/utils/utils.dart';
 import 'package:flutter/material.dart';
@@ -13,8 +14,8 @@ class Home extends StatefulWidget {
 
 class _HomeState extends State<Home> {
   final DatabaseService dbService = DatabaseService();
-
   final WorkManagerService workManagerService = WorkManagerService();
+  final PlatformChannelService platformChannelService = PlatformChannelService();
 
   @override
   void initState() {
@@ -64,6 +65,14 @@ class _HomeState extends State<Home> {
           ElevatedButton(
             onPressed: workManagerService.stopWorkManager,
             child: const Text("Stop WorkManager"),
+          ),
+          ElevatedButton(
+            onPressed: platformChannelService.startForegroundService,
+            child: const Text("Start Foreground Service"),
+          ),
+          ElevatedButton(
+            onPressed: platformChannelService.stopForegroundService,
+            child: const Text("Stop Foreground Service"),
           ),
         ],
       ),
