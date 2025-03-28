@@ -3,6 +3,8 @@ import 'package:ablecredit/services/database_service.dart';
 import 'package:ablecredit/services/isolate_service.dart';
 import 'package:ablecredit/services/platform_channel_service.dart';
 import 'package:ablecredit/services/workmanager_service.dart';
+import 'package:ablecredit/view/widgets/car_item.dart';
+import 'package:ablecredit/view/widgets/custom_button.dart';
 import 'package:flutter/material.dart';
 
 class Home extends StatefulWidget {
@@ -41,35 +43,39 @@ class _HomeState extends State<Home> {
                   return const Text("No car data available");
                 }
                 Car car = snapshot.data!;
-                return Column(
-                  children: [
-                    Text("Model: ${car.model}"),
-                    Text("Year: ${car.year}"),
-                    Text("Vehicle Tag: ${car.vehicleTag}"),
-                  ],
-                );
+                return CarItem(car: car);
               },
             ),
           ),
-          const ElevatedButton(
+          const SizedBox(height: 10),
+          const CustomButton(
             onPressed: IsolateService.executeBackgroundTask,
-            child: Text("Add Car using Isolate"),
+            text: "Add Car using Isolate",
+            icon: Icons.add_rounded,
           ),
-          ElevatedButton(
+          const SizedBox(height: 10),
+          CustomButton(
             onPressed: workManagerService.startWorkManager,
-            child: const Text("Start WorkManager"),
+            text: "Start WorkManager",
+            icon: Icons.add_rounded,
           ),
-          ElevatedButton(
+          const SizedBox(height: 10),
+          CustomButton(
             onPressed: workManagerService.stopWorkManager,
-            child: const Text("Stop WorkManager"),
+            text: "Stop WorkManager",
+            icon: Icons.add_rounded,
           ),
-          ElevatedButton(
+          const SizedBox(height: 10),
+          CustomButton(
             onPressed: platformChannelService.startForegroundService,
-            child: const Text("Start Foreground Service"),
+            text: "Start Foreground Service",
+            icon: Icons.add_rounded,
           ),
-          ElevatedButton(
+          const SizedBox(height: 10),
+          CustomButton(
             onPressed: platformChannelService.stopForegroundService,
-            child: const Text("Stop Foreground Service"),
+            text: "Stop Foreground Service",
+            icon: Icons.add_rounded,
           ),
         ],
       ),
